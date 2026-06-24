@@ -88,3 +88,54 @@ function AddTodo({ handleNewItem }) {
 }
 
 export default AddTodo;
+/*
+ * ─────────────────────────────────────────────
+ *  useRef() HOOK
+ * ─────────────────────────────────────────────
+ *
+ *  useRef() gives you a persistent mutable box
+ *  that holds a value across renders WITHOUT
+ *  causing a re-render when it changes.
+ *
+ *  It returns a plain object with one property:
+ *        { current: initialValue }
+ *
+ *  Two main uses:
+ *   1. Store reference of a DOM element
+ *   2. Store any mutable value (timer, counter)
+ *      without triggering a re-render
+ *
+ * ─────────────────────────────────────────────
+ *  HOW DOM REFERENCE FLOW WORKS
+ * ─────────────────────────────────────────────
+ *
+ *  STEP 1 — Create the ref
+ *           useRef(null)
+ *                │
+ *                ▼
+ *           { current: null }
+ *                │
+ *  STEP 2 — Attach via ref prop
+ *           <input ref={inputRef} />
+ *                │
+ *                ▼
+ *           React sees the ref prop
+ *                │
+ *  STEP 3 — Component mounts (NOT just renders)
+ *                │
+ *                ▼
+ *           { current: <input DOM node> }
+ *                │
+ *  STEP 4 — You access it
+ *                │
+ *                ▼
+ *           inputRef.current.focus()
+ *           → controls the real DOM element
+ *
+ * ─────────────────────────────────────────────
+ *  ⚠️  NOTE: ref.current is set after MOUNTING
+ *  not just rendering. Always access it inside
+ *  useEffect() or event handlers — never during
+ *  the render itself.
+ * ─────────────────────────────────────────────
+ */
