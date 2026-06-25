@@ -7,29 +7,27 @@ import "./App.css";
 import { useState } from "react";
 
 function App() {
-  // const initialTodoItem = [{
-  //   name: 'Buy Milk',
-  //   dueDate: "4 / 10 / 2023"
-  // },
-  // {
-  //   name: 'Go to College',
-  //   dueDate: "4 / 10 / 2023",
-  // },
-  // {
-  //   name: 'Go to College',
-  //   dueDate: "4 / 10 / 2023",
-  // }]
-  // const [todoItem, setTodoItems] = useState(initialTodoItem);
-  const initialTodoItem = []
   const [todoItem, setTodoItems] = useState([]);
 
   const handleNewItem = (itemName, itemDueDate) => {
-    const newTodoItem = [...todoItem,
+    
+   setTodoItems((currentValue) => {
+  // React khud currentValue mein purani todo list pass karta hai
+  // e.g. currentValue = [{name: "Homework", dueDate: "12/12"}]
+
+  const newTodoItem = [
+    ...currentValue,        // Purani list ke saare items copy karo (spread operator)
     {
-      name: itemName,
-      dueDate: itemDueDate,
-    }]
-    setTodoItems(newTodoItem);
+      name: itemName,       // Naye item ka naam (function parameter se aaya)
+      dueDate: itemDueDate, // Naye item ki due date (function parameter se aaya)
+    }
+  ];
+  // Ab newTodoItem = [...purane items, naya item]
+
+  return newTodoItem;
+  // React ko nayi list return karo
+  // React isse state mein store karega aur UI re-render karega
+});
   };
   const handleDeleteButton = (todoItemName) => {
     const newTodoItem = todoItem.filter(item => item.name != todoItemName);
